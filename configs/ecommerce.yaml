@@ -1,0 +1,20 @@
+scenario: ecommerce_comment
+model: jev-1.13.0
+text_column: text
+review_band: 0.15
+classification:
+  id: category
+  instructions: "这条中文电商评论主要应分流到哪一类？以评论者的主要诉求为准；正负混合的评论，若明确要求商家处理、赔偿、退款或解决问题，归为投诉，否则按主要评价或提问归类。"
+  options:
+    positive: "好评：主要表达满意、认可或推荐，未要求处理问题。"
+    negative: "差评：主要表达不满或负面评价，但未明确要求商家处理。"
+    inquiry: "咨询：主要是在询问商品、订单、配送或售后信息。"
+    complaint: "投诉：主要要求商家处理、赔偿、退款、解决问题，或报告严重服务问题。"
+    other: "其他：与上述类别均不匹配或信息不足。"
+additional_questions:
+  - id: needs_human_24h
+    type: choice
+    instructions: "这条评论是否需要在24小时内由人工优先处理？仅根据文本判断。"
+    options:
+      yes: "是：明确要求紧急处理、退款赔偿、严重投诉或可能造成较大损失。"
+      no: "否：一般评价、普通咨询或没有紧急人工处理迹象。"

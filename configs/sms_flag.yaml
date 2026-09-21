@@ -1,0 +1,19 @@
+scenario: sms_flag
+model: jev-1.13.0
+text_column: text
+review_band: 0.15
+classification:
+  id: category
+  instructions: "这条合成中文短信主要应分流到哪一类？以短信的主要诉求为准；正负混合或包含多种信息时，优先判断是否存在诱导、威胁或要求处理的风险信号。"
+  options:
+    fraud_suspected: "诈骗嫌疑：诱导转账、索要验证码或敏感信息、冒充身份、制造紧急威胁等。"
+    marketing: "营销：促销、优惠、活动推广或商品服务广告，未体现诈骗诱导。"
+    verification_code: "验证码：主要用于登录、注册或操作确认的一次性验证码通知。"
+    normal: "正常：普通通知、个人化但无风险的服务提醒或其他非营销非诈骗内容。"
+additional_questions:
+  - id: needs_human_24h
+    type: choice
+    instructions: "这条短信是否需要在24小时内由人工优先复核？仅根据文本判断。"
+    options:
+      yes: "是：存在较强诈骗嫌疑、紧急威胁或可能造成即时损失。"
+      no: "否：普通营销、验证码或正常通知。"
